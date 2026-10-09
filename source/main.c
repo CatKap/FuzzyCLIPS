@@ -29,33 +29,10 @@ static char rcsid[] = "$Header: /dist/CVS/fzclips/src/main.c,v 1.3 2001/08/11 21
 #include "sysdep.h"
 #include "extnfunc.h"
 #include "commline.h"
+#include "custom.h"
 
 int main(int,char *[]);
-void UserFunctions(void);
 
-/****************************************/
-/* main: Starts execution of the expert */
-/*   system development environment.    */
-/****************************************/
-int main(
-  int argc,
-  char *argv[])
-  {
-   InitializeEnvironment();   
-   RerouteStdin(argc,argv);
-   CommandLoop();
-   return(-1);
-  }
-  
-/*********************************************************/
-/* UserFunctions: Informs the expert system environment  */
-/*   of any user defined functions. In the default case, */
-/*   there are no user defined functions. To define      */
-/*   functions, either this function must be replaced by */
-/*   a function with the same name within this file, or  */
-/*   this function can be deleted from this file and     */
-/*   included in another file.                           */
-/*********************************************************/
 void UserFunctions()
   {
 /*
@@ -77,6 +54,38 @@ void UserFunctions()
 
 #endif  end of #if FUZZY_DEFTEMPLATES
 */
+    DefineFunction2(
+      "count-deftemplate",
+      'i',
+      PTIF CountDeftemplates,
+      "CountDeftemplates",
+      "11z"
+  );
+
 
   }
 
+/****************************************/
+/* main: Starts execution of the expert */
+/*   system development environment.    */
+/****************************************/
+int main(
+  int argc,
+  char *argv[])
+  {
+   InitializeEnvironment();   
+   UserFunctions();
+   RerouteStdin(argc,argv);
+   CommandLoop();
+   return(-1);
+  }
+  
+/*********************************************************/
+/* UserFunctions: Informs the expert system environment  */
+/*   of any user defined functions. In the default case, */
+/*   there are no user defined functions. To define      */
+/*   functions, either this function must be replaced by */
+/*   a function with the same name within this file, or  */
+/*   this function can be deleted from this file and     */
+/*   included in another file.                           */
+/*********************************************************/

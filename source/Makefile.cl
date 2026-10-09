@@ -3,10 +3,10 @@ CC = cc
 # in the regression test suite. This problem is only apparent when
 # using the 10.20 HP compiler with optimisation. Other compilers
 # and other settings do not show it.
-CFLAGS = -c 
+CFLAGS = -c -fPIC -lm 
 #DEBUG = -g
 DEBUG = 
-LIBS = -lm -ltermcap
+LIBS = -lm 
 
 
 OBJS = agenda.o analysis.o argacces.o bload.o bmathfun.o bsave.o \
@@ -37,7 +37,7 @@ OBJS = agenda.o analysis.o argacces.o bload.o bmathfun.o bsave.o \
  	ruledlt.o rulelhs.o rulepsr.o scanner.o sortfun.o strngfun.o \
  	strngrtr.o symblbin.o symblcmp.o symbol.o sysdep.o textpro.o \
  	tmpltbin.o tmpltbsc.o tmpltcmp.o tmpltdef.o tmpltfun.o tmpltlhs.o \
- 	tmpltpsr.o tmpltrhs.o tmpltutl.o userdata.o utility.o watch.o
+ 	tmpltpsr.o tmpltrhs.o tmpltutl.o userdata.o utility.o watch.o custom.o
 
 
 FUZZY_OBJS = fuzzycom.o  fuzzydef.o  fuzzylhs.o  fuzzymod.o  fuzzypsr.o \
@@ -51,6 +51,8 @@ ALL_OBJS = $(OBJS) $(FUZZY_OBJS)
 
 fz_clips : $(ALL_OBJS) 
 	$(CC) -o fz_clips $(ALL_OBJS) $(LIBS)
+
+
 
 # DO NOT DELETE
 
@@ -1059,6 +1061,7 @@ watch.o: userdata.h constrct.h moduldef.h scanner.h pprint.h constrnt.h
 watch.o: factbld.h pattern.h match.h network.h ruledef.h cstrccom.h agenda.h
 watch.o: reorder.h factmngr.h multifld.h fuzzylv.h dffnxfun.h extnfunc.h
 watch.o: watch.h
+custom.o: custom.h
 xclips.o: xsetup.h xclips.h xmenu_wind.h xclipstext.h setup.h agenda.h
 xclips.o: bmathfun.h classcom.h commline.h crstrtgy.h symbol.h fuzzyval.h
 xclips.o: tmpltdef.h expressn.h exprnops.h evaluatn.h constant.h userdata.h
@@ -1095,14 +1098,15 @@ xmenu_exec.o: xsetup.h xclipstext.h xmenu_exec.h xmenu.h setup.h router.h
 xmenu_exec.o: prntutil.h factmngr.h multifld.h commline.h
 xmenu_file.o: setup.h constant.h commline.h router.h prntutil.h symbol.h
 xmenu_file.o: fuzzyval.h tmpltdef.h expressn.h exprnops.h evaluatn.h
-xmenu_file.o: userdata.h constrct.h moduldef.h scanner.h pprint.h constrnt.h
+xmenu_file.o: userdata.h constrct.h moduldef.h sc\anner.h pprint.h constrnt.h
 xmenu_file.o: factbld.h pattern.h match.h network.h ruledef.h cstrccom.h
 xmenu_file.o: agenda.h reorder.h factmngr.h multifld.h fuzzylv.h dffnxfun.h
+
 xmenu_file.o: extnfunc.h xsetup.h xclips.h xclipstext.h xmenu.h xmenu_file.h
 xmenu_opt.o: xsetup.h xclips.h xmenu.h xmenu_opt.h xclipstext.h setup.h
 xmenu_opt.o: engine.h crstrtgy.h agenda.h symbol.h fuzzyval.h tmpltdef.h
 xmenu_opt.o: expressn.h exprnops.h evaluatn.h constant.h userdata.h
-xmenu_opt.o: constrct.h moduldef.h scanner.h pprint.h constrnt.h factbld.h
+menu_opt.o: constrct.h moduldef.h scanner.h pprint.h constrnt.h factbld.h
 xmenu_opt.o: pattern.h match.h network.h ruledef.h cstrccom.h reorder.h
 xmenu_opt.o: factmngr.h multifld.h fuzzylv.h dffnxfun.h extnfunc.h commline.h
 xmenu_opt.o: router.h prntutil.h globlcom.h facthsh.h exprnpsr.h bmathfun.h
@@ -1117,3 +1121,4 @@ xmenu_wind.o: cstrccom.h reorder.h factmngr.h fuzzylv.h dffnxfun.h extnfunc.h
 xmenu_wind.o: defins.h classcom.h commline.h dffctdef.h engine.h genrccom.h
 xmenu_wind.o: insfun.h msgcom.h router.h prntutil.h rulebsc.h tmpltbsc.h
 xmenu_wind.o: xsetup.h xmenu_wind.h xclips.h xmenu_file.h xclipstext.h
+

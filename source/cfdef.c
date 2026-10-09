@@ -601,7 +601,7 @@ static struct fact *getFactPtr(
    DATA_OBJECT  theResult;
    struct fact *factPtr;
 
-	EvaluateExpression(theArgument,&theResult);
+	EvaluateExpression(theArgument, &theResult);
 
 	if ((theResult.type == INTEGER) || (theResult.type == FACT_ADDRESS))
      {

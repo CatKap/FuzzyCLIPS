@@ -177,13 +177,13 @@ globle void GetToken(
 
    inchar = GetcRouter(logicalName);
    while ((inchar == ' ') || (inchar == '\n') || (inchar == '\f') ||
-          (inchar == '\r') || (inchar == ';') || (inchar == '\t'))
+          (inchar == '\r') || (inchar == ';') || (inchar == '\t') || (inchar == '#'))
      {
       /*=======================*/
       /* Remove comment lines. */
       /*=======================*/
 
-      if (inchar == ';')
+      if ((inchar == ';') || (inchar == '#'))
         {
          inchar = GetcRouter(logicalName);
          while ((inchar != '\n') && (inchar != '\r') && (inchar != EOF) )
