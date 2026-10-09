@@ -40,3 +40,6 @@ CFILES = agenda.c analysis.c argacces.c bload.c bmathfun.c bsave.c cfdef.c class
 
 lib:
 	gcc -fPIC -shared -o libfzclips.so $(CFILES)
+
+install-lib:
+	sudo mv libfzclips.so /lib/
